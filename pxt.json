@@ -1,7 +1,7 @@
 {
-    "name": "LandzoWuxianmisa",
-    "version": "0.0.6",
-    "description": "makecode Landzo Wuxianmisa package for micro:bit",
+    "name": "LandzoIoT",
+    "version": "0.0.1",
+    "description": "makecode Landzo IoT package for micro:bit",
     "license": "MIT",
     "dependencies": {
         "core": "*"

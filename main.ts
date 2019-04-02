@@ -7,7 +7,7 @@
 /**
  * Custom blocks
  */
-//% weight=100 color=#0fbc11 icon="L" block="无线米萨扩展模块"
+//% weight=100 color=#0fbc11 icon="L" block="LandZo_IoT"
 namespace LANDZO_WXMS {   
     const WUXIANMISA_I2C_ADDR = 0x20
     
