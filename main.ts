@@ -128,6 +128,22 @@ namespace LANDZO_WXMS {
 		}
 		return 0;				
 	}
+	function write_byte1(cmd: number, dat: number): void {
+        let buf = pins.createBuffer(2);
+        buf[0] = cmd;
+        buf[1] = dat;
+        pins.i2cWriteBuffer(BASE_BOARD_I2C_ADDR, buf)
+    }
+	//% blockId="Led_Dimmer" block="调节灯光亮度"
+    //% weight=50
+    export function Led_Dimmer(cmd: number, data: number)  {
+      write_byte1(cmd,data);
+    }
+		//% blockId="Wind_Dimmer" block="调节风速大小"
+    //% weight=50
+	    export function Wind_Dimmer(cmd: number, data: number)  {
+      write_byte1(cmd,data);
+    }
 	//光敏电阻
 	function gmdz_get() :number{
 		let buf = pins.createBuffer(4);

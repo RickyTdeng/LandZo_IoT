@@ -1,6 +1,6 @@
 {
     "name": "LandzoIoT",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "makecode Landzo IoT package for micro:bit",
     "license": "MIT",
     "dependencies": {
