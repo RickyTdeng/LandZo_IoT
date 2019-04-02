@@ -17,49 +17,56 @@ namespace LANDZO_WXMS {
         Get = 0x03,
     }
 	export enum WSD_CTL {
-		temperature = 0x00;
-		humidity = 0x01;
+		temperature = 0x00,
+		humidity = 0x01,
 		
 	}
 	export enum SENSOR_CTL {
-		all_sensor = 0x00;
-		range_sensor = 0x01;
-		remote_control = 0x02;
-		light_resistors = 0x03;
-		Temp_hum_sensor = 0x04;
-		Human_infrared = 0x05;
-		potentiometer  = 0x06;
-		large_key = 0x07; 
+		all_sensor = 0x00,
+		range_sensor = 0x01,
+		remote_control = 0x02,
+		light_resistors = 0x03,
+		Temp_hum_sensor = 0x04,
+		Human_infrared = 0x05,
+		potentiometer  = 0x06,
+		large_key = 0x07,
+	}
+		export enum Wind_Speed {
+         Auto_Speed = 0x00,
+		 Low_Speed = 0x01,
+		 Mid_Speed = 0x02,
+		 MidH_Speed = 0x03,
+		 High_Speed = 0x04,
 	}
 	export enum COLOUR_CTL {
-		Blue = 0x01;
-		Green = 0x02;
-		Red = 0x03;
-		Cyan = 0x04;
-		Magenta = 0x05;
-		Yellow = 0X06;
-		Lightblue = 0x07;
-		Lightgreen = 0x08;
-		Lightred = 0x09;
-		Lightcyan = 0x0a;
-		Lightmagenta = 0x0b;
-		Lightyellow = 0x0c;
-		Darkblue = 0x0d;
-		Darkgreen = 0x0e;
-		Darkred = 0x0f;
-		Darkcyan = 0x10;
-		Darkmagenta = 0x11;
-		Darkyellow = 0x12;
-		White = 0x13;
-		Lightgray = 0x14;
-		Gray = 0x15;
-		Darkgray = 0x16;
-		Black = 0x17;
-		Brown = 0x18;
-		Orange = 0x19;	
+		Blue = 0x01,
+		Green = 0x02,
+		Red = 0x03,
+		Cyan = 0x04,
+		Magenta = 0x05,
+		Yellow = 0X06,
+		Lightblue = 0x07,
+		Lightgreen = 0x08,
+		Lightred = 0x09,
+		Lightcyan = 0x0a,
+		Lightmagenta = 0x0b,
+		Lightyellow = 0x0c,
+		Darkblue = 0x0d,
+		Darkgreen = 0x0e,
+		Darkred = 0x0f,
+		Darkcyan = 0x10,
+		Darkmagenta = 0x11,
+		Darkyellow = 0x12,
+		White = 0x13,
+		Lightgray = 0x14,
+		Gray = 0x15,
+		Darkgray = 0x16,
+		Black = 0x17,
+		Brown = 0x18,
+		Orange = 0x19,	
 	}
 	export enum SIZE_CTL {
-		size4_6 = 0x01;
+		size4_6 = 0x01,
 		size6_8 = 0x02;
 		size6_9 = 0x03;
 		size8_8 = 0x04;
@@ -97,11 +104,14 @@ namespace LANDZO_WXMS {
 		BIN_mod = 0x02;
 		HEX_mod = 0x03;
 	}
-    
+    	export enum Relay_Status {
+		Relay_off = 0x00;
+        Relay_on  = 0x01;
+	}
 	
     //红外测距
     function ir_range() :number {
-		let buf = pins.createBuffer(4);.
+		let buf = pins.createBuffer(4);
 		buf[0] = 0xa4;
 		buf[1] = 0x01;
 		buf[2] = 0x01;
@@ -128,21 +138,39 @@ namespace LANDZO_WXMS {
 		}
 		return 0;				
 	}
-	function write_byte1(cmd: number, dat: number): void {
-        let buf = pins.createBuffer(2);
-        buf[0] = cmd;
-        buf[1] = dat;
-        pins.i2cWriteBuffer(BASE_BOARD_I2C_ADDR, buf)
-    }
-	//% blockId="Led_Dimmer" block="调节灯光亮度"
+
+	//% blockId="Led_Dimmer" block="调节灯光亮度|%wsd_mod|"
     //% weight=50
-    export function Led_Dimmer(cmd: number, data: number)  {
-      write_byte1(cmd,data);
+    export function Led_Dimmer(data: number) {
+		let buf = pins.createBuffer(5);
+        buf[0] = 0xa4;
+		buf[1] = 0x02;
+		buf[2] = 0x06;
+		buf[3] = number;
+		buf[4] = 0xff;
+	    pins.i2cWriteBuffer(WUXIANMISA_I2C_ADDR, buf);
     }
-		//% blockId="Wind_Dimmer" block="调节风速大小"
+	//% blockId="Wind_Dimmer" block="调节风速大小|%wsd_mod|"
     //% weight=50
-	    export function Wind_Dimmer(cmd: number, data: number)  {
-      write_byte1(cmd,data);
+	export function Wind_Dimmer(data: Wind_Speed)  {
+      let buf = pins.createBuffer(5);
+        buf[0] = 0xa4;
+		buf[1] = 0x02;
+		buf[2] = 0x05;
+		buf[3] = data;
+		buf[4] = 0xff;
+	    pins.i2cWriteBuffer(WUXIANMISA_I2C_ADDR, buf);
+    }
+		//% blockId="Wind_Dimmer" block="调节风速大小|%wsd_mod|"
+    //% weight=50
+	export function Relay_CTRL(data: Relay_Status)  {
+      let buf = pins.createBuffer(5);
+        buf[0] = 0xa4;
+		buf[1] = 0x02;
+		buf[2] = 0x08;
+		buf[3] = Relay_Status;
+		buf[4] = 0xff;
+	    pins.i2cWriteBuffer(WUXIANMISA_I2C_ADDR, buf);
     }
 	//光敏电阻
 	function gmdz_get() :number{
