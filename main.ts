@@ -217,17 +217,6 @@ namespace LANDZO_WXMS {
 		basic.pause(1);
 		return pins.i2cReadNumber(WUXIANMISA_I2C_ADDR, NumberFormat.UInt8BE);
 	}
-	//电位器
-	function rthw_get() :number{
-		let buf = pins.createBuffer(4);
-		buf[0] = 0xa4;
-		buf[1] = 0x01;
-		buf[2] = 0x06;
-		buf[3] = 0xff;
-		pins.i2cWriteBuffer(WUXIANMISA_I2C_ADDR, buf);
-		basic.pause(1);
-		return pins.i2cReadNumber(WUXIANMISA_I2C_ADDR, NumberFormat.UInt16BE);
-	}
 	//按键
 	function key_get() :number{
 		let buf = pins.createBuffer(4);
@@ -393,7 +382,7 @@ namespace LANDZO_WXMS {
 		
 	//% blockId="TFT_shownum " block="彩屏以|%num_mod|模式在坐标|%xx||%yy|处显示|%numb|数字"
     //% weight=50
-    export function TFT_settextstyle(num_mod: NUMMOD_CTL,xx:number,yy:number,numb:number) :void {
+    export function TFT_shownum(num_mod: NUMMOD_CTL,xx:number,yy:number,numb:number) :void {
         show_num(num_mod,xx,yy,numb);
     }   
 }
