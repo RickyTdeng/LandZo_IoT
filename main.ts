@@ -172,19 +172,30 @@ namespace LANDZO_WXMS {
 		buf[4] = 0xff;
 	    pins.i2cWriteBuffer(WUXIANMISA_I2C_ADDR, buf);
     }
+	//% blockId="Temp_IoT" block="温度|%wsd_mod|"
+    //% weight=50
+		export function Temp_IoT(data: number)  {
+      let buf = pins.createBuffer(5);
+        buf[0] = 0xa4;
+		buf[1] = 0x01;
+		buf[2] = 0x02;
+		buf[3] = data;
+		buf[4] = 0xff;
+	    pins.i2cWriteBuffer(WUXIANMISA_I2C_ADDR, buf);
+    }
 	//光敏电阻
 	function gmdz_get() :number{
 		let buf = pins.createBuffer(4);
 		buf[0] = 0xa4;
 		buf[1] = 0x01;
-		buf[2] = 0x03;
+		buf[2] = 0x01;
 		buf[3] = 0xff;
 		pins.i2cWriteBuffer(WUXIANMISA_I2C_ADDR, buf);
 		basic.pause(1);
 		return pins.i2cReadNumber(WUXIANMISA_I2C_ADDR, NumberFormat.UInt16BE);
 	}
 	//温湿度
-	//mod:0(温度) 1（湿度）
+	//mod: 1（湿度）0(温度)
 	function wsd_get(mod:number) :number{
 		let buf = pins.createBuffer(4);
 		let sum_dat = 0;
@@ -192,7 +203,7 @@ namespace LANDZO_WXMS {
 		let sd_dat = 0;
 		buf[0] = 0xa4;
 		buf[1] = 0x01;
-		buf[2] = 0x04;
+		buf[2] = 0x03;
 		buf[3] = 0xff;
 		pins.i2cWriteBuffer(WUXIANMISA_I2C_ADDR, buf);
 		basic.pause(1);
@@ -314,6 +325,11 @@ namespace LANDZO_WXMS {
 		pins.i2cWriteBuffer(WUXIANMISA_I2C_ADDR, buf);
 		basic.pause(1);
 	}
+		//% blockId="gmdz_read" block="读取光敏电阻传感器值"
+    //% weight=50
+    export function gmdz_read() :number {
+        return gmdz_get();//WSD_MOD
+    }
 	 //% blockId="distance_get" block="读取红外距离"
     //% weight=50
     export function distance_get() :number {
@@ -326,11 +342,7 @@ namespace LANDZO_WXMS {
         return ir_control(sed_mod);
     }
 	
-	//% blockId="gmdz_read" block="读取光敏电阻传感器值"
-    //% weight=50
-    export function gmdz_read() :number {
-        return gmdz_get();//WSD_MOD
-    }
+
 	
 	//% blockId="wsd_read" block="读取温湿度传感器|%wsd_mod|值"
     //% weight=50
