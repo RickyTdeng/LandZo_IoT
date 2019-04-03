@@ -146,7 +146,7 @@ namespace LANDZO_WXMS {
         buf[0] = 0xa4;
 		buf[1] = 0x02;
 		buf[2] = 0x06;
-		buf[3] = number;
+		buf[3] = data;
 		buf[4] = 0xff;
 	    pins.i2cWriteBuffer(WUXIANMISA_I2C_ADDR, buf);
     }
@@ -168,7 +168,7 @@ namespace LANDZO_WXMS {
         buf[0] = 0xa4;
 		buf[1] = 0x02;
 		buf[2] = 0x08;
-		buf[3] = Relay_Status;
+		buf[3] = data;
 		buf[4] = 0xff;
 	    pins.i2cWriteBuffer(WUXIANMISA_I2C_ADDR, buf);
     }
@@ -272,7 +272,7 @@ namespace LANDZO_WXMS {
 		buf[1] = 0x02;
 		buf[2] = 0x09;
 		buf[3] = 0x02;
-		buf[3] = col_dat;
+		buf[3] = siz_dat;
 		buf[5] = 0xff;
 		pins.i2cWriteBuffer(WUXIANMISA_I2C_ADDR, buf);
 		basic.pause(1);
@@ -394,6 +394,6 @@ namespace LANDZO_WXMS {
 	//% blockId="TFT_shownum " block="彩屏以|%num_mod|模式在坐标|%xx||%yy|处显示|%numb|数字"
     //% weight=50
     export function TFT_settextstyle(num_mod: NUMMOD_CTL,xx:number,yy:number,numb:number) :void {
-        text_styset(num_mod,xx,yy,numb);
+        show_num(num_mod,xx,yy,numb);
     }   
 }
