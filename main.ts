@@ -67,46 +67,46 @@ namespace LANDZO_WXMS {
 	}
 	export enum SIZE_CTL {
 		size4_6 = 0x01,
-		size6_8 = 0x02;
-		size6_9 = 0x03;
-		size8_8 = 0x04;
-		size8_9 = 0x05;
-		size8_10 = 0x06;
-		size8_12 = 0x07;
-		size8_13 = 0x08;
-		size8_15 = 0x09;
-		size8_16 = 0x0a;
-		size8_17 = 0x0b;
-		size8_18 = 0x0c;
-		size24_32= 0x0d;
-		size32_32 = 0x0e;
-		size36_48 = 0x0f;
-		size48_48 = 0x10;
-		size48_64 = 0x11;
-		size64_64 = 0x12;
-		size60_80 = 0x13;
-		size80_80 = 0x14;
+		size6_8 = 0x02,
+		size6_9 = 0x03,
+		size8_8 = 0x04,
+		size8_9 = 0x05,
+		size8_10 = 0x06,
+		size8_12 = 0x07,
+		size8_13 = 0x08,
+		size8_15 = 0x09,
+		size8_16 = 0x0a,
+		size8_17 = 0x0b,
+		size8_18 = 0x0c,
+		size24_32= 0x0d,
+		size32_32 = 0x0e,
+		size36_48 = 0x0f,
+		size48_48 = 0x10,
+		size48_64 = 0x11,
+		size64_64 = 0x12,
+		size60_80 = 0x13,
+		size80_80 = 0x14,
 	}
 	export enum FONTSHOW_CTL {
-		normal_mod = 0x01;
-		Flip_mod = 0x02;
-		transparent_mod = 0x03;
-		XOR_mod = 0x04;
+		normal_mod = 0x01,
+		Flip_mod = 0x02,
+		transparent_mod = 0x03,
+		XOR_mod = 0x04,
 	}
 	export enum TEXTSTYLE_CTL {
-		normal_mod = 0x01;
-		Underline_mod = 0x02;
-		Delet_line_mod = 0x03;
-		Over_line_mod = 0x04;
+		normal_mod = 0x01,
+		Underline_mod = 0x02,
+		Delet_line_mod = 0x03,
+		Over_line_mod = 0x04,
 	}
 	export enum NUMMOD_CTL {
-		DEC_mod = 0x01;
-		BIN_mod = 0x02;
-		HEX_mod = 0x03;
+		DEC_mod = 0x01,
+		BIN_mod = 0x02,
+		HEX_mod = 0x03,
 	}
     	export enum Relay_Status {
-		Relay_off = 0x00;
-        Relay_on  = 0x01;
+		Relay_off = 0x00,
+        Relay_on  = 0x01,
 	}
 	
     //红外测距
@@ -161,7 +161,7 @@ namespace LANDZO_WXMS {
 		buf[4] = 0xff;
 	    pins.i2cWriteBuffer(WUXIANMISA_I2C_ADDR, buf);
     }
-		//% blockId="Wind_Dimmer" block="调节风速大小|%wsd_mod|"
+		//% blockId="Relay_CTRL" block="继电器控制|%wsd_mod|"
     //% weight=50
 	export function Relay_CTRL(data: Relay_Status)  {
       let buf = pins.createBuffer(5);
