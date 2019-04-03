@@ -1,6 +1,6 @@
 {
     "name": "LandzoIoT_MiSa_Wireless",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "makecode Landzo IoT package for micro:bit",
     "license": "MIT",
     "dependencies": {

@@ -172,17 +172,23 @@ namespace LANDZO_WXMS {
 		buf[4] = 0xff;
 	    pins.i2cWriteBuffer(WUXIANMISA_I2C_ADDR, buf);
     }
-	//% blockId="Temp_IoT" block="获取温度值"
-    //% weight=50
-		export function Temp_IoT(data: number)  {
-      let buf = pins.createBuffer(5);
-        buf[0] = 0xa4;
+		//DS18B20
+	function IoT_temp_get() :number{
+		let buf = pins.createBuffer(4);
+		buf[0] = 0xa4;
 		buf[1] = 0x01;
 		buf[2] = 0x02;
-		buf[3] = data;
-		buf[4] = 0xff;
-	    pins.i2cWriteBuffer(WUXIANMISA_I2C_ADDR, buf);
+		buf[3] = 0xff;
+		pins.i2cWriteBuffer(WUXIANMISA_I2C_ADDR, buf);
+		basic.pause(1);
+		return pins.i2cReadNumber(WUXIANMISA_I2C_ADDR, NumberFormat.UInt16BE);
+	}
+	//% blockId="Temp_IoT" block="获取温度值"
+    //% weight=50
+		export function Temp_IoT() :number {
+                 return   IoT_temp_get();
     }
+
 	//光敏电阻
 	function gmdz_get() :number{
 		let buf = pins.createBuffer(4);
